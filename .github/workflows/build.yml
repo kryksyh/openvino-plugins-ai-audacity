@@ -14,13 +14,8 @@ env:
   SOURCE_PATH: ${{ github.workspace }}/code
 
 jobs:
-  build-openvino-plugins:
-    runs-on: macos-14
-
-    strategy:
-      matrix:
-        arch: [arm64, x86_64]
-
+  build-openvino-plugins-x86_64:
+    runs-on: macos-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,15 +40,51 @@ jobs:
           tarBall: true
           extract: true
       
-      - name: Build audacity for ${{ matrix.arch }}
+      - name: Build audacity for x86_64
         run: |
-          .github/scripts/build-${{ matrix.arch }}.sh
+          .github/scripts/build-x86_64.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mod-openvino-${{ matrix.arch }}
-          path: mod-openvino-${{ matrix.arch }}/
+          name: mod-openvino-x86_64
+          path: mod-openvino-x86_64/
+
+  build-openvino-plugins-arm64:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: ${{ github.workspace }}
+
+      - name: Download Audacity
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: 'audacity/audacity'
+          out-file-path: ${{ env.SOURCE_PATH }}
+          latest: true
+          tarBall: true
+          extract: true
+      
+      - name: Download Whisper.cpp
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: 'ggml-org/whisper.cpp'
+          out-file-path: ${{ env.SOURCE_PATH }}
+          latest: true
+          tarBall: true
+          extract: true
+      
+      - name: Build audacity for arm64
+        run: |
+          .github/scripts/build-arm64.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-openvino-arm64
+          path: mod-openvino-arm64/
         
 
       # - name: Pack Audacity.app
