@@ -5,6 +5,7 @@ source `dirname ${BASH_SOURCE[0]}`/config.sh
 brew install opencl-clhpp-headers
 
 mkdir -p $SOURCE_PATH
+mv *tar.gz $SOURCE_PATH
 cd $SOUCE_PATH
 tar -xf *tar.gz
 ls -la .
