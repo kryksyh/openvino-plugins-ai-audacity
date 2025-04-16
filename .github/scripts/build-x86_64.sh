@@ -51,9 +51,9 @@ mkdir -p mod-openvino-x86_64/3rdparty/rbb
 cp $BUILD_PATH/audacity/Release/Audacity.app/Contents/modules/mod-openvino.so \
     mod-openvino-x86_64/libs
 
-cp $PACKAGE_PATH/m_openvino_toolkit_macos_10_15_2024.0.0.14509.34caeefd078_x86_64/runtime/lib/x86_64/Release/*.so \
+cp $PACKAGE_PATH/m_openvino_toolkit_macos_10_15_2024.0.0.14509.34caeefd078_x86_64/runtime/lib/intel64/Release/*.so \
     mod-openvino-x86_64/libs
-cp $PACKAGE_PATH/m_openvino_toolkit_macos_10_15_2024.0.0.14509.34caeefd078_x86_64/runtime/lib/x86_64/Release/*.dylib \
+cp $PACKAGE_PATH/m_openvino_toolkit_macos_10_15_2024.0.0.14509.34caeefd078_x86_64/runtime/lib/intel64/Release/*.dylib \
     mod-openvino-x86_64/libs
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_10_15_2024.0.0.14509.34caeefd078_x86_64/runtime/3rdparty/tbb/lib/libtbb.12.dylib \
     mod-openvino-x86_64/3rdparty/tbb
