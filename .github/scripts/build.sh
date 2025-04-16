@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "HI"
+exit 0
+
 source `dirname ${BASH_SOURCE[0]}`/config.sh
 
 brew install opencl-clhpp-headers
