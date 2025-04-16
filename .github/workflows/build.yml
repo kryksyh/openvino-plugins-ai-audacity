@@ -45,6 +45,13 @@ jobs:
         run: |
           .github/scripts/build.sh
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-openvino-arm
+          path: mod-openvino-arm/
+        
+
       # - name: Pack Audacity.app
       #   run: |
       #     .github/scripts/pack.sh

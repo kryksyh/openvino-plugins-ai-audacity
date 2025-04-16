@@ -41,22 +41,24 @@ cmake -G "Unix Makefiles" \
     $SOURCE_PATH/audacity -DCMAKE_BUILD_TYPE=Release
 make -j`sysctl -n hw.ncpu`
 
-mkdir -p $BUILD_PATH/audacity/Release/3rdparty/tbb
+mkdir -p mod-openvino-arm/libs
+mkdir -p mod-openvino-arm/3rdparty/rbb
+
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/lib/arm64/Release/*.so \
-    $BUILD_PATH/audacity/Release/Audacity.app/Contents/Frameworks
+    mod-openvino-arm/libs
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/lib/arm64/Release/*.dylib \
-    $BUILD_PATH/audacity/Release/Audacity.app/Contents/Frameworks
+    mod-openvino-arm/libs
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/3rdparty/tbb/lib/libtbb.12.dylib \
-    $BUILD_PATH/audacity/Release/3rdparty/tbb
+    mod-openvino-arm/3rdparty/tbb
 
 cp $PACKAGE_PATH/libtorch/lib/libc10.dylib \
-    $BUILD_PATH/audacity/Release/Audacity.app/Contents/Frameworks
+    mod-openvino-arm/libs
 cp $PACKAGE_PATH/libtorch/lib/libtorch.dylib \
-    $BUILD_PATH/audacity/Release/Audacity.app/Contents/Frameworks
+    mod-openvino-arm/libs
 cp $PACKAGE_PATH/libtorch/lib/libtorch_cpu.dylib \
-    $BUILD_PATH/audacity/Release/Audacity.app/Contents/Frameworks
+    mod-openvino-arm/libs
 
-cp $PACKAGE_PATH/whisper/lib/libwhisper.dylib \
-    $BUILD_PATH/audacity/Release/Audacity.app/Contents/Frameworks
+cp -P $PACKAGE_PATH/whisper/lib/*.dylib \
+    mod-openvino-arm/libs
 
-xattr -cr $BUILD_PATH/audacity/Release
+xattr -cr mod-openvino-arm/
