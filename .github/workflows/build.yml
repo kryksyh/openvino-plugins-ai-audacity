@@ -17,6 +17,10 @@ jobs:
   build-openvino-plugins:
     runs-on: macos-14
 
+    strategy:
+      matrix:
+        arch: [arm64, x86_64]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,15 +45,15 @@ jobs:
           tarBall: true
           extract: true
       
-      - name: Build audacity
+      - name: Build audacity for ${{ matrix.arch }}
         run: |
-          .github/scripts/build.sh
+          .github/scripts/build-${{ matrix.arch }}.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mod-openvino-arm
-          path: mod-openvino-arm/
+          name: mod-openvino-${{ matrix.arch }}
+          path: mod-openvino-${{ matrix.arch }}/
         
 
       # - name: Pack Audacity.app

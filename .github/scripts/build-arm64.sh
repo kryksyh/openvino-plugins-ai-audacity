@@ -25,7 +25,7 @@ export LIBTORCH_ROOTDIR=$PACKAGE_PATH/libtorch
 
 mkdir -p $BUILD_PATH/whisper
 cd $BUILD_PATH/whisper
-cmake $SOURCE_PATH/whisper.cpp -DWHISPER_OPENVINO=ON
+cmake $SOURCE_PATH/whisper.cpp -DWHISPER_OPENVINO=ON -DMACOS_ARCHITECTURE=arm64
 make -j`sysctl -n hw.ncpu`
 
 cmake --install . --config Release --prefix $PACKAGE_PATH/whisper
@@ -38,27 +38,33 @@ cd $BUILD_PATH/audacity
 
 cmake -G "Unix Makefiles" \
     -D CMAKE_CXX_FLAGS="-I/opt/homebrew/opt/opencl-clhpp-headers/include" \
+    -DMACOS_ARCHITECTURE=arm64 \
     $SOURCE_PATH/audacity -DCMAKE_BUILD_TYPE=Release
 make -j`sysctl -n hw.ncpu`
 
-mkdir -p mod-openvino-arm/libs
-mkdir -p mod-openvino-arm/3rdparty/rbb
+cd $BUILD_PATH/..
+
+mkdir -p mod-openvino-arm64/libs
+mkdir -p mod-openvino-arm64/3rdparty/rbb
+
+cp $BUILD_PATH/audacity/Release/Audacity.app/Contents/modules/mod-openvino.so \
+    mod-openvino-arm64/libs
 
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/lib/arm64/Release/*.so \
-    mod-openvino-arm/libs
+    mod-openvino-arm64/libs
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/lib/arm64/Release/*.dylib \
-    mod-openvino-arm/libs
+    mod-openvino-arm64/libs
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/3rdparty/tbb/lib/libtbb.12.dylib \
-    mod-openvino-arm/3rdparty/tbb
+    mod-openvino-arm64/3rdparty/tbb
 
 cp $PACKAGE_PATH/libtorch/lib/libc10.dylib \
-    mod-openvino-arm/libs
+    mod-openvino-arm64/libs
 cp $PACKAGE_PATH/libtorch/lib/libtorch.dylib \
-    mod-openvino-arm/libs
+    mod-openvino-arm64/libs
 cp $PACKAGE_PATH/libtorch/lib/libtorch_cpu.dylib \
-    mod-openvino-arm/libs
+    mod-openvino-arm64/libs
 
 cp -P $PACKAGE_PATH/whisper/lib/*.dylib \
-    mod-openvino-arm/libs
+    mod-openvino-arm64/libs
 
-xattr -cr mod-openvino-arm/
+xattr -cr mod-openvino-arm64/
