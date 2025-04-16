@@ -6,7 +6,7 @@ brew install opencl-clhpp-headers
 
 mkdir -p $SOURCE_PATH
 mv *tar.gz $SOURCE_PATH
-cd $SOUCE_PATH
+cd $SOURCE_PATH
 tar -xf *tar.gz
 ls -la .
 cd ..
