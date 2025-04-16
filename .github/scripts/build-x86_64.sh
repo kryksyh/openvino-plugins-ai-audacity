@@ -25,7 +25,7 @@ export LIBTORCH_ROOTDIR=$PACKAGE_PATH/libtorch
 
 mkdir -p $BUILD_PATH/whisper
 cd $BUILD_PATH/whisper
-cmake $SOURCE_PATH/whisper.cpp -DWHISPER_OPENVINO=ON -DMACOS_ARCHITECTURE=x86_64
+cmake $SOURCE_PATH/whisper.cpp -DWHISPER_OPENVINO=ON -DMACOS_ARCHITECTURE=x86_64 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13
 make -j`sysctl -n hw.ncpu`
 
 cmake --install . --config Release --prefix $PACKAGE_PATH/whisper
@@ -39,6 +39,7 @@ cd $BUILD_PATH/audacity
 cmake -G "Unix Makefiles" \
     -D CMAKE_CXX_FLAGS="-I/opt/homebrew/opt/opencl-clhpp-headers/include" \
     -DMACOS_ARCHITECTURE=x86_64 \
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13 \
     $SOURCE_PATH/audacity -DCMAKE_BUILD_TYPE=Release
 make -j`sysctl -n hw.ncpu`
 
