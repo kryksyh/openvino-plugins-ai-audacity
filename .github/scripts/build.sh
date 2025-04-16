@@ -4,13 +4,6 @@ source `dirname ${BASH_SOURCE[0]}`/config.sh
 
 brew install opencl-clhpp-headers
 
-mkdir -p $SOURCE_PATH
-mv *tar.gz $SOURCE_PATH
-cd $SOURCE_PATH
-tar -xf *tar.gz
-ls -la .
-cd ..
-
 cp -r mod-openvino $SOURCE_PATH/audacity/modules
 sed -i '' 's/set( FOLDERS/set( FOLDERS\n   mod-openvino/' $SOURCE_PATH/audacity/modules/CMakeLists.txt
 mkdir -p $PACKAGE_PATH

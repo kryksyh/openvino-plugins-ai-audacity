@@ -27,15 +27,19 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: 'audacity/audacity'
+          out-file-path: ${{ env.SOURCE_PATH }}
           latest: true
           tarBall: true
+          extract: true
       
       - name: Download Whisper.cpp
         uses: robinraju/release-downloader@v1
         with:
           repository: 'ggml-org/whisper.cpp'
+          out-file-path: ${{ env.SOURCE_PATH }}
           latest: true
           tarBall: true
+          extract: true
       
       - name: Build audacity
         run: |
