@@ -36,12 +36,10 @@ mkdir -p $BUILD_PATH/audacity
 cd $BUILD_PATH/audacity
 
 
-# cmake -G "Unix Makefiles" \
-#     -D CMAKE_CXX_FLAGS="-I/opt/homebrew/opt/opencl-clhpp-headers/include" \
-#     $SOURCE_PATH/audacity -DCMAKE_BUILD_TYPE=Release
+cmake -G "Unix Makefiles" \
+    -D CMAKE_CXX_FLAGS="-I/opt/homebrew/opt/opencl-clhpp-headers/include" \
+    $SOURCE_PATH/audacity -DCMAKE_BUILD_TYPE=Release
 make -j`sysctl -n hw.ncpu`
-
-find Release
 
 mkdir -p $BUILD_PATH/audacity/Release/3rdparty/tbb
 cp $PACKAGE_PATH/m_openvino_toolkit_macos_11_0_2024.0.0.14509.34caeefd078_arm64/runtime/lib/arm64/Release/*.so \
