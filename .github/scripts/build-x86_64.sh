@@ -37,7 +37,7 @@ cd $BUILD_PATH/audacity
 
 
 cmake -G "Unix Makefiles" \
-    -D CMAKE_CXX_FLAGS="-I/opt/homebrew/opt/opencl-clhpp-headers/include" \
+    -D CMAKE_CXX_FLAGS="-I/usr/local/opt/opencl-clhpp-headers/include" \
     -DMACOS_ARCHITECTURE=x86_64 \
     -DCMAKE_OSX_DEPLOYMENT_TARGET=10.15 \
     $SOURCE_PATH/audacity -DCMAKE_BUILD_TYPE=Release
